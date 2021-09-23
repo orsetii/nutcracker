@@ -1,0 +1,4 @@
+build/
+walnut.bin
+**.o
+**.d
