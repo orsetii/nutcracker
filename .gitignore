@@ -1,4 +1,5 @@
 build/
-walnut.bin
+nutcracker.*
 **.o
+**.bin
 **.d
