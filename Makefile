@@ -31,7 +31,7 @@ ALLFILES := $(SRCFILES) $(HDRFILES) $(AUXFILES)
 # GCC Flags
 CC := gcc
 WARNINGS := -Wall -Wextra -Wshadow -Wpointer-arith -Wcast-align \
-	-Wwrite-strings -Wmissing-prototypes -Wmissing-declarations \
+	-Wwrite-strings \
 	-Wredundant-decls -Wnested-externs -Winline -Wno-long-long \
 	-Wconversion -Wstrict-prototypes
 
@@ -52,14 +52,14 @@ ARFLAGS := -rcs
 # Targets
 .PHONY: all clean dist check testdrivers todolist run
 
-all: nutcracker.a
+all: libnutcracker.a
 
 run: nutcracker.bin
 	./scripts/qemu.sh ./nutcracker.bin
 	
 # Compiles to an archive to be linked with the kernel
-nutcracker.a: $(OBJFILES)
-	@$(AR) $(ARFLAGS) nutcracker.a $?
+libnutcracker.a: $(OBJFILES)
+	@$(AR) $(ARFLAGS) libnutcracker.a $?
 # Compiles to a bootable binary which can then be run via qemu script
 nutcracker.bin: $(OBJFILES)
 	@$(LD) $(LDFLAGS) $? -o nutcracker.bin
@@ -67,7 +67,7 @@ nutcracker.bin: $(OBJFILES)
 	
 clean:
 	-@$(RM) $(wildcard $(shell find $(PROJDIRS) -type f -name "*.o" -o -name "*.d" -o -name "*.*_t") \
-		nutcracker.a nutcracker.bin)
+		libnutcracker.a nutcracker.bin)
 	
 dist:
 	@tar czf nutcracker.tgz $(ALLFILES)
