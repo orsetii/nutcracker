@@ -44,7 +44,7 @@ AS := nasm
 ASMFLAGS := -g -felf64
 # Linker Flags
 LD := ld
-LDFLAGS := 
+LDFLAGS := -T link.ld
 # Archiver Flags
 AR := ar
 ARFLAGS := -rcs
@@ -52,16 +52,16 @@ ARFLAGS := -rcs
 # Targets
 .PHONY: all clean dist check testdrivers todolist run
 
-all: libnutcracker.a
+all: clean libnutcracker.a
 
 run: nutcracker.bin
 	./scripts/qemu.sh ./nutcracker.bin
 	
 # Compiles to an archive to be linked with the kernel
-libnutcracker.a: $(OBJFILES)
+libnutcracker.a: $(OBJFILES) 
 	@$(AR) $(ARFLAGS) libnutcracker.a $?
 # Compiles to a bootable binary which can then be run via qemu script
-nutcracker.bin: $(OBJFILES)
+nutcracker.bin: $(OBJFILES) 
 	@$(LD) $(LDFLAGS) $? -o nutcracker.bin
 
 	

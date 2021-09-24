@@ -1,5 +1,6 @@
 build/
 nutcracker.*
+libnutcracker.*
 **.o
 **.bin
 **.d
