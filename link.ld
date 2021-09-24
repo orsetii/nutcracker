@@ -4,9 +4,13 @@ SECTIONS
 {
     . = KERNEL_VMA;
 
+	.multiboot : AT(ADDR(.multiboot) - KERNEL_VMA)
+	{
+		*(.multiboot)
+        . = ALIGN(4096);
+	}
     .text : AT(ADDR(.text) - KERNEL_VMA)
     {
-		*(.multiboot)
         *(.text)
         . = ALIGN(4096);
     }
