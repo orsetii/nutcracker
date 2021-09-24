@@ -1,9 +1,11 @@
 ENTRY(_start)
+KERNEL_VMA = 0x400000;
 SECTIONS
 {
-    . = 0xC1000000;
+    /* Base virtual address */
+    . = KERNEL_VMA;
 
-    .text : AT(ADDR(.text) - 0xC1000000)
+    .text : AT(ADDR(.text) - KERNEL_VMA)
     {
         *(.multiboot)
         _code = .;
@@ -12,21 +14,21 @@ SECTIONS
         . = ALIGN(4096);
     }
 
-   .data : AT(ADDR(.data) - 0xC1000000)
+   .data : AT(ADDR(.data) - KERNEL_VMA)
    {
         _data = .;
         *(.data)
         . = ALIGN(4096);
    }
 
-   .eh_frame : AT(ADDR(.eh_frame) - 0xC1000000)
+   .eh_frame : AT(ADDR(.eh_frame) - KERNEL_VMA)
    {
        _ehframe = .;
        *(.eh_frame)
         . = ALIGN(4096);
    }
 
-   .bss : AT(ADDR(.bss) - 0xC1000000)
+   .bss : AT(ADDR(.bss) - KERNEL_VMA)
    {
        _bss = .;
        *(.bss)

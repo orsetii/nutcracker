@@ -44,8 +44,7 @@ AS := nasm
 ASMFLAGS := -g -felf64
 # Linker Flags
 LD := ld
-LDFLAGS := -T link.ld 
-
+LDFLAGS := 
 # Archiver Flags
 AR := ar
 ARFLAGS := -rcs
