@@ -1,16 +1,3 @@
-MBALIGN  equ  1 << 0           
-MEMINFO  equ  1 << 1            
-FLAGS    equ  MBALIGN | MEMINFO 
-MAGIC    equ  0x1BADB002        
-CHECKSUM equ -(MAGIC + FLAGS)   
- 
-; Section for the multiboot
-section .multiboot
-align 4
-	dd MAGIC
-	dd FLAGS
-	dd CHECKSUM
- 
 ; Section for stack
 section .bss
 align 16

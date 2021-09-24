@@ -3,14 +3,12 @@ KERNEL_VMA = 0x400000;
 SECTIONS
 {
     . = KERNEL_VMA;
-
-	.multiboot : AT(ADDR(.multiboot) - KERNEL_VMA)
-	{
-		*(.multiboot)
-        . = ALIGN(4096);
-	}
     .text : AT(ADDR(.text) - KERNEL_VMA)
     {
+        . = ALIGN(4);
+        LONG(0x1BADB002)
+        LONG(0x00000003)
+        LONG(0xE4524FFB)
         *(.text)
         . = ALIGN(4096);
     }
